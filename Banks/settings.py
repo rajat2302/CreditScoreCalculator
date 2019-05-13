@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*0=ex&7&-x@k0at*(1=7@@i&ljlvt-a-0d^bypt79&ind7bfb1'
+SECRET_KEY = os.environ.get('SECRET_KEY', '*0=ex&7&-x@k0at*(1=7@@i&ljlvt-a-0d^bypt79&ind7bfb1')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['credit-score-calculator.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -79,11 +80,11 @@ WSGI_APPLICATION = 'Banks.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bankdb',
-        'USER': 'postgres',
-        'PASSWORD': 'Prime@2302',
-        'HOST': 'localhost',
-        'PORT': '5433',
+        'NAME': os.environ.get('DATABASE_NAME', 'bankdb'),
+        'USER': os.environ.get('DATABASE_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'Prime@2302'),
+        'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
+        'PORT': os.environ.get('DATABASE_PORT', '5433'),
     }
 }
 
@@ -135,3 +136,7 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+
+'''
+postgres://addtyttignxoxz:934faabe30e66eb30a9636ded4c231f1e99a2f72845ba5ee5246a9d0abb064d9@ec2-23-23-228-132.compute-1.amazonaws.com:5432/dafa93fu7v3md3
+'''
