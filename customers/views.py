@@ -41,16 +41,16 @@ def profile(request):
         return render(request, 'customers/profile.html',context)
 
 def account(request):
-    credit_detail = CreditScore.objects.filter(profile=request.user.profile)
-    if credit_detail.exists():
-        credit_detail = credit_detail[0]
-        print(credit_detail)
     account_detail = Profile.objects.filter(user=request.user)
-    balance = Footprint.objects.filter(profile=request.user.profile)
-    if balance.exists():
-        balance = balance[0]
     if account_detail.exists():
+        credit_detail = CreditScore.objects.filter(profile=request.user.profile)
+        if credit_detail.exists():
+            credit_detail = credit_detail[0]
+            print(credit_detail)
         account_detail = account_detail[0]
+        balance = Footprint.objects.filter(profile=request.user.profile)
+        if balance.exists():
+            balance = balance[0]
         context = {
             'balance':balance,
             'credit': credit_detail,

@@ -10,7 +10,7 @@ def prepare_trained_set():
     regressor = cache.get('regressor')
     if not regressor:
         print("calcaulating reg")
-        online_footprint_dataset = pd.read_csv(r"C:\Users\\rajat\Downloads\default-of-credit-card-clients-dataset\UCI_Credit_Card.csv")
+        online_footprint_dataset = pd.read_csv(r"{% static 'UCI_Credit_Card.csv' %}")
         y = online_footprint_dataset['default.payment.next.month'].values.tolist()
         x = online_footprint_dataset.drop(['LIMIT_BAL', 'ID', 'default.payment.next.month'], axis=1).values.tolist()
         X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.1, random_state=0)
@@ -25,7 +25,7 @@ def prepare_trained_set_for_creditLimit():
     model = cache.get('model')
     if not model:
         print("calcauting model")
-        online_footprint_dataset = pd.read_csv(r"C:\Users\\rajat\Downloads\default-of-credit-card-clients-dataset\UCI_Credit_Card1.csv")
+        online_footprint_dataset = pd.read_csv(r"{% static 'UCI_Credit_Card1.csv'%}")
         y = online_footprint_dataset['LIMIT_BAL'].values.tolist()
         x = online_footprint_dataset.drop(['LIMIT_BAL', 'ID', 'default.payment.next.month'], axis=1).values.tolist()
         X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.1, random_state=0)
